@@ -8,7 +8,7 @@ public class Meeting {
 	private Location location;
 	private ArrayList<Scholar> programChairs;
 	private ArrayList<Scholar> committeeMembers;
-	private ArrayList<Paper> papersList;
+	private ArrayList<Paper> papersPublished;
 	
 	/**
 	 * Default constructor for the class
@@ -22,11 +22,16 @@ public class Meeting {
 	 * @param newLocation Location of the meeting
 	 * @param newProgramChairs Chairs of the meeting
 	 * @param newCommitteeMembers Committee of the meeting
-	 * @param newPaperList Papers published at the meeting
+	 * @param newPapersPublished Papers published at the meeting
 	 */
-	public Meeting(int newMonth, int newYear, Location newLocation, ArrayList<Scholar> newProgramChairs, ArrayList<Scholar> newCommitteeMembers, ArrayList<Paper> newPaperList)
+	public Meeting(int newMonth, int newYear, Location newLocation, ArrayList<Scholar> newProgramChairs, ArrayList<Scholar> newCommitteeMembers, ArrayList<Paper> newPapersPublished)
 	{
-		
+		month = newMonth;
+		year = newYear;
+		location = newLocation;
+		programChairs = newProgramChairs;
+		committeeMembers = newCommitteeMembers;
+		papersPublished = newPapersPublished;
 	}
 	
 	/**
@@ -72,8 +77,8 @@ public class Meeting {
 	/**
 	 * @return Papers published at the meeting
 	 */
-	public ArrayList<Paper> getPapersList()
+	public ArrayList<Paper> getPapersPublished()
 	{
-		return papersList;
+		return papersPublished;
 	}
 }
