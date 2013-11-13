@@ -25,7 +25,19 @@ public class Scholar {
 	 */
 	public Scholar(String name, ArrayList<String> newAffiliations, ArrayList<String> newResearchAreas, ArrayList<Paper> newPaperList, ArrayList<ScholarOrganization> newScholarlyEfforts)
 	{
-		
+		String[] nameParts = name.split(" ");
+		if(nameParts[0].endsWith(",")){	//Must be last, first middle format
+			primaryName = nameParts[0].split(",")[0];
+			secondaryName = nameParts[1] + " " + nameParts[2];
+		}
+		else{	//Must be first middle last format
+			primaryName = nameParts[2];
+			secondaryName = nameParts[0] + " " + nameParts[1];
+		}
+		affiliations = newAffiliations;
+		researchAreas = newResearchAreas;
+		paperList = newPaperList;
+		scholarlyEfforts = newScholarlyEfforts;
 	}
 	
 	
