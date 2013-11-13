@@ -2,7 +2,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Comparator;
 
-public abstract class Paper implements Comparable<Paper>, Serializable, Comparator<Paper>
+public abstract class Paper implements Serializable
 {	
 	private static final long serialVersionUID = -8913776819739550541L;
 	
@@ -19,15 +19,6 @@ public abstract class Paper implements Comparable<Paper>, Serializable, Comparat
 	 * Default constructor.
 	 */
 	public Paper() {}
-	
-	/**
-	 * Compares one paper to another by the given criteria.
-	 * @param otherPaper The paper you want to compare against.
-	 */
-	public int compareTo(Paper otherPaper)
-	{
-		return -2;
-	}
 
 	/**
 	 * @return the authors of the paper
