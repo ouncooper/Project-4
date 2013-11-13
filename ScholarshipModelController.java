@@ -5,7 +5,7 @@ public class ScholarshipModelController {
 	
 	private ScholarshipModel model;
 	private ScholarshipModelSelectionView selectionView;
-	private ArrayList<ScholarshipModelSelectionView> displayView;
+	private ArrayList<ScholarshipModelDisplayView> displayView;
 	
 	/**
 	 * Default constructor for the class
@@ -25,7 +25,7 @@ public class ScholarshipModelController {
 	 */
 	public void setModel(ScholarshipModel newModel)
 	{
-		
+		model = newModel;
 	}
 	
 	/**
@@ -33,15 +33,15 @@ public class ScholarshipModelController {
 	 */
 	public void setSelection(ScholarshipModelSelectionView newView)
 	{
-		
+		selectionView = newView;
 	}
 	
 	/**
 	 * Adds a new display view
 	 */
-	public void addDisplayView()
+	public void addDisplayView(ScholarshipModelDisplayView newDisplayView)
 	{
-		
+		displayView.add(newDisplayView);
 	}
 	
 }

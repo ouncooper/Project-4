@@ -38,5 +38,10 @@ public class ConferencePaper extends Paper implements Serializable
 	{
 		return conferenceReference;
 	}
-	
+
+	@Override
+	public int compare(Paper o1, Paper o2) {
+		// TODO Auto-generated method stub
+		return 0;
+	}	
 }

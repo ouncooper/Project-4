@@ -32,6 +32,7 @@ public abstract class Paper implements Serializable
 	 */
 	public void addAuthor(String authorName) {
 		//authors.add(new Scholar(authorName, null, null, null, null)); //Needs adjustment
+		//TODO
 	}
 
 	/**
@@ -74,5 +75,10 @@ public abstract class Paper implements Serializable
 	 */
 	public void setDOI(String DOI) {
 		this.DOI = DOI;
+	}
+
+	public int compare(Paper o1, Paper o2) {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 }

@@ -6,7 +6,7 @@ public class ScholarshipModel {
 
 	private ArrayList<Scholar> scholars;
 	private ArrayList<ScholarOrganization> scholarOrganizations;
-	private ArrayList<ActionListener> actionListeners;
+	private ArrayList<ActionListener> actionListenerList;
 	
 	/**
 	 * Default constructor for the class
@@ -17,18 +17,21 @@ public class ScholarshipModel {
 	 * Adds an actionListner to the ArrayList to be called on changes.
 	 * @param actionListener New ActionListener to add
 	 */
-	public void addActionListener(ActionListener actionListener)
+	public void addActionListener(ActionListener al)
 	{
-		
+		if (actionListenerList == null)
+			actionListenerList = new ArrayList<ActionListener>();
+		actionListenerList.add(al);
 	}
 	
 	/**
 	 * Removes an actionListener from the ArrayList.
 	 * @param actionListener ActionListener to remove
 	 */
-	public void removeActionListener(ActionListener actionListener)
+	public void removeActionListener(ActionListener al)
 	{
-		
+		if (actionListenerList.contains(al))
+			actionListenerList.remove(al);
 	}
 	
 	/**
