@@ -11,10 +11,15 @@ public class Location {
 	
 	/**
 	 * Preferred constructor for the class
+	 * @param city The name of the City
+	 * @param state The state or province
+	 * @param country The country
 	 */
 	public Location(String city, String state, String country)
 	{
-		
+		cityName = city;
+		stateOrProvince = state;
+		this.country = country;
 	}
 	
 	/**
