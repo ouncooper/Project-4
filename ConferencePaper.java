@@ -23,15 +23,13 @@ public class ConferencePaper extends Paper implements Serializable, Comparator<P
 	 * @param newPageRange Page range specified in the file.
 	 * @param newDOI Digital Object Identifier for the paper.
 	 */
-	public ConferencePaper(String newName, String newAuthors, String newTitle, String newSerialTitle, String newPageRange, String newDate,  String newDOI)
+	public ConferencePaper(Conference newConferenceReference, String newAuthors, String newTitle, String newPageRange, String newDOI)
 	{
-		setName(newName);
+		conferenceReference = newConferenceReference;
 		for(String author:newAuthors.split("; "))
 			addAuthor(author);
 		setTitle(newTitle);
-		setSerialTitle(newSerialTitle);
 		setPageRange(newPageRange);
-		setDate(newDate);
 		setDOI(newDOI);
 	}
 	
