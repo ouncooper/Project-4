@@ -15,11 +15,9 @@ public class ConferencePaper extends Paper implements Serializable, Comparator<P
 	/**
 	 * Inherits from the Paper class.
 	 * Creates a ConferencePaper Object
-	 * @param newName Name of the paper ("Conference Paper").
+	 * @param newConferenceReference Reference to the conference the paper was published at
 	 * @param newAuthors Authors of the paper in the format Last, First Middle; Last, First Middle; etc.
 	 * @param newTitle Title of the paper.
-	 * @param newSerialTitle Serial title of the paper.
-	 * @param newDate Date the paper was published.
 	 * @param newPageRange Page range specified in the file.
 	 * @param newDOI Digital Object Identifier for the paper.
 	 */
