@@ -17,24 +17,21 @@ public class JournalArticle extends Paper implements Serializable, Comparator<Pa
 	/**
 	 * Inherits from the Paper class.
 	 * Creates a JournalArticle Object
-	 * @param newName Name of the paper ("Journal Article").
+	 * @param newJournal Reference to the journal the article is published in
 	 * @param newAuthors Authors of the paper in the format Last, First Middle; Last, First Middle; etc.
 	 * @param newTitle Title of the paper.
-	 * @param newSerialTitle Serial title of the paper.
-	 * @param newDate Date the paper was published.
-	 * @param newVolumeIssuePageRange Volume, issue, and page range specified in the file.  Split into two variables.
+	 * @param newVolumeIssue volume and issue
+	 * @param newPageRange page range of the article
 	 * @param newDOI Digital Object Identifier for the paper.
 	 **/
-	public JournalArticle(Journal newJournal, String newName, String newAuthors, String newTitle, String newSerialTitle, String newVolumeIssuePageRange, String newDate, String newDOI)
+	public JournalArticle(Journal newJournal, String newAuthors, String newTitle, String newVolumeIssue, String newPageRange, String newDOI)
 	{
-		setName(newName);
+		journalReference = newJournal;
 		for(String author: newAuthors.split("; "))
 			addAuthor(author);
 		setTitle(newTitle);
-		setSerialTitle(newSerialTitle);
-		volumeIssue = newVolumeIssuePageRange.split(":")[0];
-		setPageRange(newVolumeIssuePageRange.split(":")[1]);
-		setDate(newDate);
+		volumeIssue = newVolumeIssue;
+		setPageRange(newPageRange);
 		setDOI(newDOI);
 	}
 	
