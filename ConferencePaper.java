@@ -1,7 +1,7 @@
 import java.io.Serializable;
 import java.util.Comparator;
 
-public class ConferencePaper extends Paper implements Serializable, Comparator<Paper>
+public class ConferencePaper extends Paper implements Serializable
 {
 	private static final long serialVersionUID = 8507820325335680360L;
 
@@ -32,14 +32,6 @@ public class ConferencePaper extends Paper implements Serializable, Comparator<P
 	}
 	
 	/**
-	 * Converts the object to a string separated by " // "
-	 */
-	public String toString()
-	{
-		return "";
-	}
-
-	/**
 	 * @return The conference this paper was published at
 	 */
 	public Conference getConference()
@@ -47,11 +39,4 @@ public class ConferencePaper extends Paper implements Serializable, Comparator<P
 		return conferenceReference;
 	}
 	
-	/**
-	 * Compares one paper to another.
-	 */
-	@Override
-	public int compare(Paper o1, Paper o2) {
-		return 0;
-	}
 }
