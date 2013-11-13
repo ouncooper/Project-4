@@ -16,7 +16,7 @@ public class Volume {
 	 */
 	public Volume(ArrayList<Issue> newIssueCollection)
 	{
-		
+		issueCollection = newIssueCollection;
 	}
 	
 	public ArrayList<Issue> getIssueCollection()
