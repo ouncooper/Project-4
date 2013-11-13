@@ -1,12 +1,14 @@
+import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 
 public class ScholarshipModel {
 
-	private ArrayList<Scholar> scholars;
+	private ArrayList<Scholar> scholars = new ArrayList<Scholar>();
 	private ArrayList<ScholarOrganization> scholarOrganizations;
-	private ArrayList<ActionListener> actionListenerList;
+	private ArrayList<ActionListener> actionListenerList = new ArrayList<ActionListener>();
 	
 	/**
 	 * Default constructor for the class
@@ -17,21 +19,16 @@ public class ScholarshipModel {
 	 * Adds an actionListner to the ArrayList to be called on changes.
 	 * @param actionListener New ActionListener to add
 	 */
-	public void addActionListener(ActionListener al)
-	{
-		if (actionListenerList == null)
-			actionListenerList = new ArrayList<ActionListener>();
-		actionListenerList.add(al);
+	public void addActionListener(ActionListener actionListener){
+		actionListenerList.add(actionListener);
 	}
 	
 	/**
 	 * Removes an actionListener from the ArrayList.
 	 * @param actionListener ActionListener to remove
 	 */
-	public void removeActionListener(ActionListener al)
-	{
-		if (actionListenerList.contains(al))
-			actionListenerList.remove(al);
+	public void removeActionListener(ActionListener actionListener){
+		actionListenerList.remove(actionListener);
 	}
 	
 	/**
@@ -79,7 +76,38 @@ public class ScholarshipModel {
 	
 	}
 
-	public ArrayList<Scholar> getScholars() {
-		return null; //Necessary for junit
+	public ArrayList<Scholar> getScholars() { return scholars;}
+	
+	public void addScholar(Scholar input){
+		scholars.add(input);
+		processEvent(new ActionEvent(this, ActionEvent.ACTION_PERFORMED, "Add Scholar"));
 	}
-}
+	
+	/**
+	 * Removes a specific scholar
+	 * @param name The name of the scholar in the form first middle last
+	 */
+	public void removeScholar(String name){
+		Scholar s = null;
+		
+		//Find the scholar by name and then remove it
+		for(Scholar eachScholar: scholars)
+			if((eachScholar.getSecondaryName() + " " + eachScholar.getPrimaryName()).equalsIgnoreCase(name))
+				s = eachScholar;
+		
+		if(s != null){
+			scholars.remove(s);
+			processEvent(new ActionEvent(this, ActionEvent.ACTION_PERFORMED, "Remove Scholar"));
+		}
+	}
+	
+	public void removeAllScholars(){
+		scholars.clear();
+		processEvent(new ActionEvent(this, ActionEvent.ACTION_PERFORMED, "Remove All Scholars"));
+	}
+	
+	private void processEvent(ActionEvent e){
+		//Go through each action listener and tell them that something changed
+		for(int i = 0; i < actionListenerList.size(); i++)
+			actionListenerList.get(i).actionPerformed(e);
+	}
