@@ -14,16 +14,14 @@ public class Conference {
 	 * Preferred constructor for the class
 	 * @param newMeetingCollection Meetings at the conference
 	 */
-	public Conference(ArrayList<Meeting> newMeetingCollection)
-	{
-		
+	public Conference(ArrayList<Meeting> newMeetingCollection){
+		meetingCollection = newMeetingCollection;
 	}
 	
 	/**
 	 * @return Meetings at the conference
 	 */
-	public ArrayList<Meeting> getMeetingCollection()
-	{
+	public ArrayList<Meeting> getMeetingCollection(){
 		return meetingCollection;
 	}
 }
