@@ -16,7 +16,8 @@ public class Journal {
 	 */
 	public Journal(Location newLocation, ArrayList<Volume> newVolumeCollection)
 	{
-		
+		location = newLocation;
+		volumeCollection = newVolumeCollection;
 	}
 	
 	public Location getLocation()
