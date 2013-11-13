@@ -24,7 +24,11 @@ public class Issue {
 	 */
 	public Issue(int newMonth, int newYear, ArrayList<Scholar> newEditors, ArrayList<Scholar> newReviewers, ArrayList<Paper> newArticlesPublished)
 	{
-		
+		month = newMonth;
+		year = newYear;
+		editors = newEditors;
+		reviewers = newReviewers;
+		articlesPublished = newArticlesPublished;
 	}
 	
 	/**
