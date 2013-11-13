@@ -41,33 +41,10 @@ public class Scholar {
 	}
 	
 	
-	public String getPrimaryName()
-	{
-		return primaryName;
-	}
-	
-	public String getSecondaryName()
-	{
-		return secondaryName;
-	}
-	
-	public ArrayList<String> getAffiliations()
-	{
-		return affiliations;
-	}
-	
-	public ArrayList<String> getResearchAreas()
-	{
-		return researchAreas;
-	}
-	
-	public ArrayList<Paper> getPaperList()
-	{
-		return paperList;
-	}
-	
-	public ArrayList<ScholarOrganization> getScholarlyEfforts()
-	{
-		return scholarlyEfforts;
-	}
+	public String getPrimaryName(){ return primaryName;}
+	public String getSecondaryName(){ return secondaryName;}
+	public ArrayList<String> getAffiliations(){ return affiliations;}
+	public ArrayList<String> getResearchAreas(){ return researchAreas;}
+	public ArrayList<Paper> getPaperList(){ return paperList;}
+	public ArrayList<ScholarOrganization> getScholarlyEfforts(){ return scholarlyEfforts;}
 }
