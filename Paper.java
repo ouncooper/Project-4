@@ -30,10 +30,13 @@ public abstract class Paper implements Serializable
 	/**
 	 * @param the authors of the paper
 	 */
-	public void addAuthor(String authorName) {
-		//authors.add(new Scholar(authorName, null, null, null, null)); //Needs adjustment
+	public void addAuthor(Scholar author) {
+		authors.add(author);
 	}
 
+	public void removeAuthor(Scholar author) {
+		authors.remove(author);
+	}
 	/**
 	 * @return the title of the paper
 	 */
