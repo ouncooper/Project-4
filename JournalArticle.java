@@ -1,4 +1,5 @@
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Comparator;
 
 public class JournalArticle extends Paper implements Serializable
@@ -24,11 +25,11 @@ public class JournalArticle extends Paper implements Serializable
 	 * @param newPageRange page range of the article
 	 * @param newDOI Digital Object Identifier for the paper.
 	 **/
-	public JournalArticle(Journal newJournal, String newAuthors, String newTitle, String newVolumeIssue, String newPageRange, String newDOI)
+	public JournalArticle(Journal newJournal, ArrayList<Scholar> newAuthors, String newTitle, String newVolumeIssue, String newPageRange, String newDOI)
 	{
 		journalReference = newJournal;
-		for(String author: newAuthors.split("; "))
-			addAuthor(author);
+		for(Scholar eachScholar: newAuthors)
+			addAuthor(eachScholar);
 		setTitle(newTitle);
 		volumeIssue = newVolumeIssue;
 		setPageRange(newPageRange);
@@ -49,12 +50,6 @@ public class JournalArticle extends Paper implements Serializable
 	public Journal getJournal()
 	{
 		return journalReference;
-	}
-
-	@Override
-	public int compare(Paper o1, Paper o2) {
-		// TODO Auto-generated method stub
-		return 0;
 	}
 
 }
