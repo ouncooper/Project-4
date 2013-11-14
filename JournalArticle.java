@@ -25,7 +25,7 @@ public class JournalArticle extends Paper implements Serializable
 	 * @param newPageRange page range of the article
 	 * @param newDOI Digital Object Identifier for the paper.
 	 **/
-	public JournalArticle(Journal newJournal, ArrayList<Scholar> newAuthors, String newTitle, String newVolumeIssue, String newPageRange, String newDOI)
+	public JournalArticle(Journal newJournal, ArrayList<Scholar> newAuthors, String newTitle, String newVolumeIssue, String newPageRange, String newDOI, int newYear)
 	{
 		journalReference = newJournal;
 		for(Scholar eachScholar: newAuthors)
@@ -34,6 +34,7 @@ public class JournalArticle extends Paper implements Serializable
 		volumeIssue = newVolumeIssue;
 		setPageRange(newPageRange);
 		setDOI(newDOI);
+		setYear(newYear);
 	}
 	
 	/**
