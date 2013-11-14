@@ -1,5 +1,9 @@
+import java.io.Serializable;
 
-public abstract class ScholarOrganization {
+
+public abstract class ScholarOrganization implements Serializable{
+
+	private static final long serialVersionUID = 8369931218405922856L;
 	/* A variable to store the name of the organization */
 	private String name;
 	
