@@ -65,14 +65,18 @@ public class ScholarshipModelController {
 		displayView.add(newDisplayView);
 	}
 	
-	
-	//************************************
 	public class addScholarButtonActionListener implements ActionListener{
 		public void actionPerformed(ActionEvent actionEvent) {	//The button was pressed
 			//pop up and prompt the user for input
 			String scholarName = (String)JOptionPane.showInputDialog(null, "Please Enter the Scholar's Name", "Author Name", JOptionPane.QUESTION_MESSAGE, null, null, "First Middle Last");
 			String affiliation = (String)JOptionPane.showInputDialog(null, "Please Enter the Scholar's Affiliations (delimited by semi-colons)", "Affiliations", JOptionPane.QUESTION_MESSAGE, null, null, "Affiliation 1; Affiliation 2");
 			String researchAreas = (String)JOptionPane.showInputDialog(null, "Please Enter the Scholar's Research areas (delimited by semi-colons)", "Research Areas", JOptionPane.QUESTION_MESSAGE, null, null, "Area 1; Area 2");
+			
+			//Prevent multiple of same name
+			for(Scholar eachScholar: model.getScholars())
+				if((eachScholar.getSecondaryName() + " " + eachScholar.getPrimaryName()).equalsIgnoreCase(scholarName))
+					return;
+			
 			model.addScholar(new Scholar(scholarName, new ArrayList<String>(Arrays.asList(affiliation.split(";"))), new ArrayList<String>(Arrays.asList(researchAreas.split(";"))), null, null));
 			selectionView.deleteScholarsButtonSetEnabled(true);
 			selectionView.addSerialButtonSetEnabled(true);
@@ -261,7 +265,6 @@ public class ScholarshipModelController {
 					authors.add(scholars.get(scholarList.getSelectedIndices()[i]));
 				JOptionPane.showMessageDialog(null, serialList, "Select Serial", JOptionPane.PLAIN_MESSAGE);
 				
-				////NEW TODO
 				if(serials.get(serialList.getSelectedIndex()) instanceof Conference){
 					conferenceReference = (Conference)serials.get(serialList.getSelectedIndex());
 					model.addPaper(new ConferencePaper(conferenceReference, authors, paperTitle, pageRange, DOI, year));
@@ -283,7 +286,6 @@ public class ScholarshipModelController {
 					authors.add(scholars.get(scholarList.getSelectedIndices()[i]));
 				JOptionPane.showMessageDialog(null, serialList, "Select Serial", JOptionPane.PLAIN_MESSAGE);
 				
-				////NEW TODO
 				if(serials.get(serialList.getSelectedIndex()) instanceof Journal){
 					journalReference = (Journal)serials.get(serialList.getSelectedIndex());
 					model.addPaper(new JournalArticle(journalReference, authors, paperTitle, volumeIssue, pageRange, DOI, year));
@@ -328,26 +330,20 @@ public class ScholarshipModelController {
 		}
 	}
 	
-	/**** NICKS JOB ******/
-	public class openActionListener implements ActionListener{
+	public class saveActionListener implements ActionListener{
 		public void actionPerformed(ActionEvent actionEvent) {	//Open file was pressed
-			JFileChooser fileChooser = new JFileChooser();
-			JFrame fileFrame = new JFrame("File Chooser");
-			fileFrame.add(fileChooser);
-			fileFrame.pack();
-			fileFrame.setVisible(true);
-			
-			
-			
-			System.out.println(fileChooser.getSelectedFile().getPath());
+			String filename = (String)JOptionPane.showInputDialog(null, "Please Enter the filename", "Filename", JOptionPane.QUESTION_MESSAGE, null, null, "scholarshipModel.ssm");
+			System.out.println("saved");
 			FileOutputStream fileStream;
 			ObjectOutputStream objectStream;
 			try {
-				fileStream = new FileOutputStream("filname");
+				fileStream = new FileOutputStream(filename);
 				objectStream = new ObjectOutputStream(fileStream);
 				
 				//Write the model
-				objectStream.writeObject(model);
+				objectStream.writeObject(model.getScholars());
+				objectStream.writeObject(model.getSerials());
+				objectStream.writeObject(model.getSerials());
 				
 				objectStream.close();
 				fileStream.close();
@@ -360,15 +356,19 @@ public class ScholarshipModelController {
 			}
 		}
 	}
-	public class saveActionListener implements ActionListener{
+	public class openActionListener implements ActionListener{
 		public void actionPerformed(ActionEvent actionEvent) {	//Save file was pressed
+			String filename = (String)JOptionPane.showInputDialog(null, "Please Enter the filename", "Filename", JOptionPane.QUESTION_MESSAGE, null, null, "scholarshipModel.ssm");
+			
 			FileInputStream fileStream;
 			ObjectInputStream objectStream;
 			try {
-				fileStream = new FileInputStream("filename");
+				fileStream = new FileInputStream(filename);
 				objectStream = new ObjectInputStream(fileStream);
 				
-				model = (ScholarshipModel) objectStream.readObject();
+				model.setScholars((ArrayList<Scholar>) objectStream.readObject());
+				model.setSerials((ArrayList<ScholarOrganization>) objectStream.readObject());
+				model.setPapers((ArrayList<Paper>) objectStream.readObject());
 				
 				objectStream.close();
 				fileStream.close();
