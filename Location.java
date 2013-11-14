@@ -1,5 +1,9 @@
+import java.io.Serializable;
 
-public class Location {
+
+public class Location implements Serializable{
+
+	private static final long serialVersionUID = 3407614860934296952L;
 	private String cityName;
 	private String stateOrProvince;
 	private String country;
