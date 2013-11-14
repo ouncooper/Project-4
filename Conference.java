@@ -1,29 +1,43 @@
+import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Comparator;
 
+public class ConferencePaper extends Paper implements Serializable
+{
+	private static final long serialVersionUID = 8507820325335680360L;
 
-public class Conference extends ScholarOrganization{
-	
-	private ArrayList<Meeting> meetingCollection;
+	private Conference conferenceReference;
 	
 	/**
-	 * Default constructor for the class
+	 * Default constructor for the class.
 	 */
-	public Conference() { }
+	public ConferencePaper() {}
 	
 	/**
-	 * Preferred constructor for the class
-	 * @param newMeetingCollection Meetings at the conference
-	 * @param organizationName The name of the organization
+	 * Inherits from the Paper class.
+	 * Creates a ConferencePaper Object
+	 * @param newConferenceReference Reference to the conference the paper was published at
+	 * @param newAuthors Authors of the paper in the format Last, First Middle; Last, First Middle; etc.
+	 * @param newTitle Title of the paper.
+	 * @param newPageRange Page range specified in the file.
+	 * @param newDOI Digital Object Identifier for the paper.
 	 */
-	public Conference(ArrayList<Meeting> newMeetingCollection, String organizationName){
-		meetingCollection = newMeetingCollection;
-		this.setName(organizationName);
+	public ConferencePaper(Conference newConferenceReference, ArrayList<Scholar> newAuthors, String newTitle, String newPageRange, String newDOI)
+	{
+		conferenceReference = newConferenceReference;
+		for(Scholar eachScholar: newAuthors)
+			addAuthor(eachScholar);
+		setTitle(newTitle);
+		setPageRange(newPageRange);
+		setDOI(newDOI);
 	}
 	
 	/**
-	 * @return Meetings at the conference
+	 * @return The conference this paper was published at
 	 */
-	public ArrayList<Meeting> getMeetingCollection(){
-		return meetingCollection;
+	public Conference getConference()
+	{
+		return conferenceReference;
 	}
+	
 }
