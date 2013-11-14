@@ -25,4 +25,9 @@ public abstract class ScholarOrganization {
 	{
 		return name;
 	}
+	
+	public void setName(String input){
+		name = input;
+	}
+	
 }
