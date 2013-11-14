@@ -1,4 +1,5 @@
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Comparator;
 
 public class ConferencePaper extends Paper implements Serializable
@@ -21,14 +22,15 @@ public class ConferencePaper extends Paper implements Serializable
 	 * @param newPageRange Page range specified in the file.
 	 * @param newDOI Digital Object Identifier for the paper.
 	 */
-	public ConferencePaper(Conference newConferenceReference, String newAuthors, String newTitle, String newPageRange, String newDOI)
+	public ConferencePaper(Conference newConferenceReference, ArrayList<Scholar> newAuthors, String newTitle, String newPageRange, String newDOI, int newYear)
 	{
 		conferenceReference = newConferenceReference;
-		for(String author:newAuthors.split("; "))
-			addAuthor(author);
+		for(Scholar eachScholar: newAuthors)
+			addAuthor(eachScholar);
 		setTitle(newTitle);
 		setPageRange(newPageRange);
 		setDOI(newDOI);
+		setYear(newYear);
 	}
 	
 	/**
@@ -38,10 +40,5 @@ public class ConferencePaper extends Paper implements Serializable
 	{
 		return conferenceReference;
 	}
-
-	@Override
-	public int compare(Paper o1, Paper o2) {
-		// TODO Auto-generated method stub
-		return 0;
-	}	
+	
 }
