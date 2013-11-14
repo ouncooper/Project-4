@@ -14,6 +14,8 @@ public abstract class Paper implements Serializable
 	private String pageRange;
 	/* A variable to store the digital object identifier of the paper.*/
 	private String DOI;
+	/* A variable to store the year published*/
+	private int year;
 	
 	/**
 	 * Default constructor.
@@ -77,5 +79,9 @@ public abstract class Paper implements Serializable
 	 */
 	public void setDOI(String DOI) {
 		this.DOI = DOI;
+	}
+	
+	public void setYear(int year){
+		this.year = year;
 	}
 }
