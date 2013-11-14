@@ -1,8 +1,10 @@
+import java.io.Serializable;
 import java.util.ArrayList;
 
 
-public class Meeting {
+public class Meeting implements Serializable{
 	
+	private static final long serialVersionUID = 3496460704383348473L;
 	private int month;
 	private int year;
 	private Location location;
