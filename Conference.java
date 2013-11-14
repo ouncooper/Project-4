@@ -1,8 +1,10 @@
+import java.io.Serializable;
 import java.util.ArrayList;
 
 
-public class Conference extends ScholarOrganization{
-	
+public class Conference extends ScholarOrganization implements Serializable{
+
+	private static final long serialVersionUID = 264126877942499537L;
 	private ArrayList<Meeting> meetingCollection;
 	
 	/**
