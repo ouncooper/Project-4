@@ -23,11 +23,19 @@ public class Journal extends ScholarOrganization implements Serializable{
 		this.setName(organizationName);
 	}
 	
+	/**
+	 * 
+	 * @return The location of the journal publisher
+	 */
 	public Location getLocation()
 	{
 		return location;
 	}
 	
+	/**
+	 * 
+	 * @return The volume of issues
+	 */
 	public ArrayList<Volume> getVolumeCollection()
 	{
 		return volumeCollection;
