@@ -206,14 +206,25 @@ public class ScholarshipModelSelectionView extends JFrame implements ActionListe
 	public JMenuItem getPlotNCAPP(){ return plotNCAPP;}
 	
 	public JList<String> getScholarsList(){ return scholarsList;}
+	public JList<String> getSerialsList(){ return serialsList;}
+	public JList<String> getPapersList(){ return papersList;}
+	
 	
 	public void actionPerformed(ActionEvent e) {
-		// refetch all the data
-		
 		//Update the scholar list
 		scholarsModel.clear();
 		for(Scholar eachScholar: model.getScholars())
 			scholarsModel.addElement(eachScholar.getSecondaryName() + " " + eachScholar.getPrimaryName());
+		
+		//Update the serial list
+		serialsModel.clear();
+		for(ScholarOrganization eachSerial: model.getSerials())
+			serialsModel.addElement(eachSerial.getName());
+		
+		//Update the papers list
+		papersModel.clear();
+		for(Paper eachPaper: model.getPapers())
+			papersModel.addElement(eachPaper.getTitle());
 	}
 	
 	public void deleteScholarsButtonSetEnabled(boolean input){
