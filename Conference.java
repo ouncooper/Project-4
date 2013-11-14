@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 
 
-public class Conference {
+public class Conference extends ScholarOrganization{
 	
 	private ArrayList<Meeting> meetingCollection;
 	
@@ -13,9 +13,11 @@ public class Conference {
 	/**
 	 * Preferred constructor for the class
 	 * @param newMeetingCollection Meetings at the conference
+	 * @param organizationName The name of the organization
 	 */
-	public Conference(ArrayList<Meeting> newMeetingCollection){
+	public Conference(ArrayList<Meeting> newMeetingCollection, String organizationName){
 		meetingCollection = newMeetingCollection;
+		this.setName(organizationName);
 	}
 	
 	/**
