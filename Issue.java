@@ -72,10 +72,18 @@ public class Issue implements Serializable{
 	{
 		return articlesPublished;
 	}
-	
+	/**
+	 * 
+	 * @param input The scholar you want to remove
+	 */
 	public void removeEditor(Scholar input){
 		editors.remove(input);
 	}
+	
+	/**
+	 * 
+	 * @param input The Scholar you want to remove
+	 */
 	public void removeReviewer(Scholar input){
 		reviewers.remove(input);
 	}
