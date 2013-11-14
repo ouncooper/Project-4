@@ -70,4 +70,11 @@ public class Issue {
 	{
 		return articlesPublished;
 	}
+	
+	public void removeEditor(Scholar input){
+		editors.remove(input);
+	}
+	public void removeReviewer(Scholar input){
+		reviewers.remove(input);
+	}
 }
