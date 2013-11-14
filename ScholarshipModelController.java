@@ -1,9 +1,16 @@
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
 
 import javax.swing.DefaultListModel;
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
@@ -237,6 +244,7 @@ public class ScholarshipModelController {
 			String volumeIssue;
 			String pageRange;
 			String DOI;
+			int year;
 			ArrayList<Scholar> authors = new ArrayList<Scholar>();
 			Journal journalReference;
 			Conference conferenceReference;
@@ -247,14 +255,21 @@ public class ScholarshipModelController {
 				paperTitle = (String)JOptionPane.showInputDialog(null, "Please Enter the Paper Title", "Paper Title", JOptionPane.QUESTION_MESSAGE, null, null, "Sample Title");
 				pageRange = (String)JOptionPane.showInputDialog(null, "Please Enter the Page Range", "Page Range", JOptionPane.QUESTION_MESSAGE, null, null, "101-108");
 				DOI = (String)JOptionPane.showInputDialog(null, "Please Enter the Digital Object Identifier", "DOI", JOptionPane.QUESTION_MESSAGE, null, null, "http://www.papers.com/samplePaper.pdf");
+				year = Integer.parseInt((String)JOptionPane.showInputDialog(null, "Please Enter the year of publication", "Publication Year", JOptionPane.QUESTION_MESSAGE, null, null, "1990"));
 				JOptionPane.showMessageDialog(null, scholarList, "Select Authors", JOptionPane.PLAIN_MESSAGE);
 				for(int i = 0; i < scholarList.getSelectedIndices().length; i++)
 					authors.add(scholars.get(scholarList.getSelectedIndices()[i]));
 				JOptionPane.showMessageDialog(null, serialList, "Select Serial", JOptionPane.PLAIN_MESSAGE);
-				conferenceReference = (Conference)serials.get(serialList.getSelectedIndex());
 				
-				model.addPaper(new ConferencePaper(conferenceReference, authors, paperTitle, pageRange, DOI));
-				selectionView.deletePapersButtonSetEnabled(true);
+				////NEW TODO
+				if(serials.get(serialList.getSelectedIndex()) instanceof Conference){
+					conferenceReference = (Conference)serials.get(serialList.getSelectedIndex());
+					model.addPaper(new ConferencePaper(conferenceReference, authors, paperTitle, pageRange, DOI, year));
+					selectionView.deletePapersButtonSetEnabled(true);
+					selectionView.plotMenuSetEnabled(true);
+				}else{
+					JOptionPane.showMessageDialog(null,"Selected Serial is not a Conference.", "Not a Conference Error", JOptionPane.ERROR_MESSAGE);
+				}
 				
 			}else{
 				//Journal Article
@@ -262,14 +277,21 @@ public class ScholarshipModelController {
 				volumeIssue = (String)JOptionPane.showInputDialog(null, "Please Enter the Volume and Issue", "Volume Issue", JOptionPane.QUESTION_MESSAGE, null, null, "foobar");
 				pageRange = (String)JOptionPane.showInputDialog(null, "Please Enter the Page Range", "Page Range", JOptionPane.QUESTION_MESSAGE, null, null, "101-108");
 				DOI = (String)JOptionPane.showInputDialog(null, "Please Enter the Digital Object Identifier", "DOI", JOptionPane.QUESTION_MESSAGE, null, null, "http://www.papers.com/samplePaper.pdf");
+				year = Integer.parseInt((String) JOptionPane.showInputDialog(null, "Please Enter the year of publication", "Publication Year", JOptionPane.QUESTION_MESSAGE, null, null, "1990"));
 				JOptionPane.showMessageDialog(null, scholarList, "Select Authors", JOptionPane.PLAIN_MESSAGE);
 				for(int i = 0; i < scholarList.getSelectedIndices().length; i++)
 					authors.add(scholars.get(scholarList.getSelectedIndices()[i]));
 				JOptionPane.showMessageDialog(null, serialList, "Select Serial", JOptionPane.PLAIN_MESSAGE);
-				journalReference = (Journal)serials.get(serialList.getSelectedIndex());
 				
-				model.addPaper(new JournalArticle(journalReference, authors, paperTitle, volumeIssue, pageRange, DOI));
-				selectionView.deletePapersButtonSetEnabled(true);
+				////NEW TODO
+				if(serials.get(serialList.getSelectedIndex()) instanceof Journal){
+					journalReference = (Journal)serials.get(serialList.getSelectedIndex());
+					model.addPaper(new JournalArticle(journalReference, authors, paperTitle, volumeIssue, pageRange, DOI, year));
+					selectionView.deletePapersButtonSetEnabled(true);
+					selectionView.plotMenuSetEnabled(true);
+				}else{
+					JOptionPane.showMessageDialog(null,"Selected Serial is not a Journal.", "Not a Journal Error", JOptionPane.ERROR_MESSAGE);
+				}
 			}
 		}
 	}
@@ -282,6 +304,7 @@ public class ScholarshipModelController {
 				model.removePaper(selectionView.getPapersList().getSelectedValue().toString());
 				if(model.getPapers().isEmpty()){
 					selectionView.deletePapersButtonSetEnabled(false);
+					selectionView.plotMenuSetEnabled(false);
 				}
 			}
 		}
@@ -295,10 +318,12 @@ public class ScholarshipModelController {
 					//Get the selected value and remove it
 					model.removeAllPapers();
 					selectionView.deletePapersButtonSetEnabled(false);
+					selectionView.plotMenuSetEnabled(false);
 				}
 			}else{	//Force remove all papers
 				model.removeAllPapers();
 				selectionView.deletePapersButtonSetEnabled(false);
+				selectionView.plotMenuSetEnabled(false);
 			}
 		}
 	}
@@ -306,12 +331,56 @@ public class ScholarshipModelController {
 	/**** NICKS JOB ******/
 	public class openActionListener implements ActionListener{
 		public void actionPerformed(ActionEvent actionEvent) {	//Open file was pressed
+			JFileChooser fileChooser = new JFileChooser();
+			JFrame fileFrame = new JFrame("File Chooser");
+			fileFrame.add(fileChooser);
+			fileFrame.pack();
+			fileFrame.setVisible(true);
 			
+			
+			
+			System.out.println(fileChooser.getSelectedFile().getPath());
+			FileOutputStream fileStream;
+			ObjectOutputStream objectStream;
+			try {
+				fileStream = new FileOutputStream("filname");
+				objectStream = new ObjectOutputStream(fileStream);
+				
+				//Write the model
+				objectStream.writeObject(model);
+				
+				objectStream.close();
+				fileStream.close();
+			} catch (FileNotFoundException e) {
+				e.printStackTrace();
+				return;
+			} catch (IOException e) {
+				e.printStackTrace();
+				return;
+			}
 		}
 	}
 	public class saveActionListener implements ActionListener{
 		public void actionPerformed(ActionEvent actionEvent) {	//Save file was pressed
-			
+			FileInputStream fileStream;
+			ObjectInputStream objectStream;
+			try {
+				fileStream = new FileInputStream("filename");
+				objectStream = new ObjectInputStream(fileStream);
+				
+				model = (ScholarshipModel) objectStream.readObject();
+				
+				objectStream.close();
+				fileStream.close();
+			}catch(FileNotFoundException e){
+				e.printStackTrace();
+				return;
+			} catch (IOException e) {
+				e.printStackTrace();
+				return;
+			} catch (ClassNotFoundException e) {
+				e.printStackTrace();
+			}
 		}
 	}
 	public class TOPActionListener implements ActionListener{
