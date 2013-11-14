@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 
 
-public class Journal {
+public class Journal extends ScholarOrganization{
 
 	private Location location;
 	private ArrayList<Volume> volumeCollection;
@@ -14,10 +14,11 @@ public class Journal {
 	/**
 	 * The preferred constructor for the class
 	 */
-	public Journal(Location newLocation, ArrayList<Volume> newVolumeCollection)
+	public Journal(Location newLocation, ArrayList<Volume> newVolumeCollection, String organizationName)
 	{
 		location = newLocation;
 		volumeCollection = newVolumeCollection;
+		this.setName(organizationName);
 	}
 	
 	public Location getLocation()
