@@ -245,5 +245,7 @@ public class ScholarshipModelSelectionView extends JFrame implements ActionListe
 		deletePaperButton.setEnabled(input);
 		deleteAllPapersButton.setEnabled(input);
 	}
-		
+	public void plotMenuSetEnabled(boolean input){
+		plotMenu.setEnabled(input);
+	}
 }
