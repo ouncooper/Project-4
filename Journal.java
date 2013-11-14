@@ -1,8 +1,10 @@
+import java.io.Serializable;
 import java.util.ArrayList;
 
 
-public class Journal extends ScholarOrganization{
+public class Journal extends ScholarOrganization implements Serializable{
 
+	private static final long serialVersionUID = 381167438674763534L;
 	private Location location;
 	private ArrayList<Volume> volumeCollection;
 	
