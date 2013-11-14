@@ -81,4 +81,12 @@ public class Meeting {
 	{
 		return papersPublished;
 	}
+	
+	public void removeProgramChair(Scholar input){
+		programChairs.remove(input);
+	}
+	
+	public void removeCommitteeMember(Scholar input){
+		committeeMembers.remove(input);
+	}
 }
