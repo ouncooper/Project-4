@@ -1,11 +1,14 @@
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 
 
-public class ScholarshipModel {
+public class ScholarshipModel implements Serializable{
 
+	
+	private static final long serialVersionUID = -4692275818772626767L;
 	private ArrayList<Scholar> scholars = new ArrayList<Scholar>();
 	private ArrayList<ScholarOrganization> scholarOrganizations = new ArrayList<ScholarOrganization>();
 	private ArrayList<Paper> papers = new ArrayList<Paper>();
@@ -177,3 +180,17 @@ public class ScholarshipModel {
 		for(int i = 0; i < actionListenerList.size(); i++)
 			actionListenerList.get(i).actionPerformed(e);
 	}
+	
+	public void setScholars(ArrayList<Scholar> input){
+		scholars = input;
+		processEvent(new ActionEvent(this, ActionEvent.ACTION_PERFORMED, ""));
+	}
+	public void setSerials(ArrayList<ScholarOrganization> input){
+		scholarOrganizations = input;
+		processEvent(new ActionEvent(this, ActionEvent.ACTION_PERFORMED, ""));
+	}
+	public void setPapers(ArrayList<Paper> input){
+		papers = input;
+		processEvent(new ActionEvent(this, ActionEvent.ACTION_PERFORMED, ""));
+	}
+}
