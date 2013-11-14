@@ -84,10 +84,18 @@ public class Meeting implements Serializable{
 		return papersPublished;
 	}
 	
+	/**
+	 * 
+	 * @param input the scholar you want to remove
+	 */
 	public void removeProgramChair(Scholar input){
 		programChairs.remove(input);
 	}
 	
+	/**
+	 * 
+	 * @param input the scholar you want to remove
+	 */
 	public void removeCommitteeMember(Scholar input){
 		committeeMembers.remove(input);
 	}
